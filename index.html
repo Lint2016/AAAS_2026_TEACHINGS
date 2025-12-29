@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/IMG-20250916-WA0003.jpg" type="image/x-icon">
+    <title>AAASummit2026</title>
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero-section">
+        <div class="container hero-content">
+            <img src="assets/IMG-20250916-WA0003-removebg-preview.png" alt="">
+            <h1 class="display-title">All Africa Apostolic Summit</h1>
+            <p class="hero-description">A transformative experience of apostolic impartation, prophetic teachings,
+                leadership activation, and prayer, as we equip and empower Africa’s next generation of Kingdom leaders
+                .</p>
+            <button id="scroll-to-teachings" class="btn btn-primary">
+                Watch Teachings <i class="ph ph-arrow-down"></i>
+            </button>
+        </div>
+        <div class="hero-background-overlay"></div>
+    </header>
+
+    <!-- Teachings Section -->
+    <main id="teachings" class="teachings-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Collection</h2>
+                <p>15 Exclusive Teachings</p>
+            </div>
+
+            <div id="teachings-list">
+                <!-- Rendered via JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="modal" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1" data-close="true"></div>
+        <div class="modal-container" role="dialog" aria-modal="true">
+            <button class="modal-close" aria-label="Close modal" data-close="true">
+                <i class="ph ph-x"></i>
+            </button>
+            <div class="video-wrapper">
+                <div id="video-placeholder" class="video-placeholder">
+                    <i class="ph ph-play-circle"></i>
+                    <p>Video Player Placeholder</p>
+                </div>
+                <!-- Real video iframe would go here -->
+            </div>
+            <div class="modal-content">
+                <h3 id="modal-title">Teaching Title</h3>
+                <p id="modal-description">Teaching description goes here.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-logo">AAASUMMIT 2026</span>
+                    <p>&copy; 2026 AAASummit. All rights reserved.</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="mailto:info@aaasummit.co.za">Email: info@aaasummit.co.za</a>
+                    <a href="tel:+27761369924">Bernard: +27 76 136 9924</a>
+                    <a href="tel:+27762457595">Lerato: +27 76 245 7595</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast / Notification -->
+    <div id="toast" class="toast hidden">
+        <i class="ph ph-check-circle"></i>
+        <span id="toast-message">Action successful</span>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
