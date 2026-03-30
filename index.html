@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/IMG-20250916-WA0003.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/IMG-20250916-WA0003.jpg" type="image/jpeg">
     <title>AAASummit2026</title>
 
     <!-- Typography -->
@@ -26,13 +26,12 @@
     <!-- Hero Section -->
     <header id="hero" class="hero-section">
         <div class="container hero-content">
-            <img src="assets/IMG-20250916-WA0003-removebg-preview.png" alt="">
+            <img src="assets/IMG-20250916-WA0003-removebg-preview.png" alt="AAASummit Logo">
             <h1 class="display-title">All Africa Apostolic Summit</h1>
             <p class="hero-description">A transformative experience of apostolic impartation, prophetic teachings,
-                leadership activation, and prayer, as we equip and empower Africa’s next generation of Kingdom leaders
-                .</p>
+                leadership activation, and prayer, as we equip and empower Africa’s next generation of Kingdom leaders.</p>
             <button id="scroll-to-teachings" class="btn btn-primary">
-                Watch Teachings <i class="ph ph-arrow-down"></i>
+                Explore Teachings <i class="ph ph-arrow-down"></i>
             </button>
         </div>
         <div class="hero-background-overlay"></div>
@@ -56,13 +55,18 @@
     <div id="video-modal" class="modal" aria-hidden="true">
         <div class="modal-overlay" tabindex="-1" data-close="true"></div>
         <div class="modal-container" role="dialog" aria-modal="true">
-            <button class="modal-close" aria-label="Close modal" data-close="true">
-                <i class="ph ph-x"></i>
-            </button>
+            <div class="modal-controls">
+                <button id="modal-share" class="modal-btn modal-share" aria-label="Share teaching">
+                    <i class="ph ph-share-network"></i>
+                </button>
+                <button class="modal-btn modal-close" aria-label="Close modal" data-close="true">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
             <div class="video-wrapper">
                 <div id="video-placeholder" class="video-placeholder">
-                    <i class="ph ph-play-circle"></i>
-                    <p>Video Player Placeholder</p>
+                    <i class="ph ph-headphones"></i>
+                    <p>Media Player Placeholder</p>
                 </div>
                 <!-- Real video iframe would go here -->
             </div>

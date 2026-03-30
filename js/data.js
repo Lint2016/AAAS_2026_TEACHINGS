@@ -10,7 +10,8 @@ export const teachings = [
         presenter: "Apostle Brandon",
         duration: "45 min",
         date: "February 25, 2026",
-        videoUrl: "placeholder_1",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -20,7 +21,8 @@ export const teachings = [
         presenter: "Pastor Chris",
         duration: "32 min",
         date: "February 25, 2026",
-        videoUrl: "placeholder_2",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -30,7 +32,8 @@ export const teachings = [
         presenter: "Pastor Elena",
         duration: "50 min",
         date: "February 25, 2026",
-        videoUrl: "placeholder_3",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -40,7 +43,8 @@ export const teachings = [
         presenter: "Apostle David",
         duration: "40 min",
         date: "February 25, 2026",
-        videoUrl: "placeholder_4",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -50,7 +54,8 @@ export const teachings = [
         presenter: "Bishop Mathebula",
         duration: "38 min",
         date: "February 25, 2026",
-        videoUrl: "placeholder_5",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -60,7 +65,8 @@ export const teachings = [
         presenter: "Bishop James Nkosi",
         duration: "42 min",
         date: "February 26, 2026",
-        videoUrl: "placeholder_6",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -70,7 +76,8 @@ export const teachings = [
         presenter: "Dr. Sarah Mthethwa",
         duration: "35 min",
         date: "February 26, 2026",
-        videoUrl: "placeholder_7",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -80,7 +87,8 @@ export const teachings = [
         presenter: "Prophet Michael Dlamini",
         duration: "48 min",
         date: "February 26, 2026",
-        videoUrl: "placeholder_8",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -90,7 +98,8 @@ export const teachings = [
         presenter: "Pastor Rachel Green",
         duration: "44 min",
         date: "February 26, 2026",
-        videoUrl: "placeholder_9",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -100,7 +109,8 @@ export const teachings = [
         presenter: "Dr. Alex Johnson",
         duration: "30 min",
         date: "February 26, 2026",
-        videoUrl: "placeholder_10",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -110,7 +120,8 @@ export const teachings = [
         presenter: "Apostle Olivia Smith",
         duration: "46 min",
         date: "February 27, 2026",
-        videoUrl: "placeholder_11",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -120,7 +131,8 @@ export const teachings = [
         presenter: "Pastor Chris Wilson",
         duration: "55 min",
         date: "February 27, 2026",
-        videoUrl: "placeholder_12",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -130,7 +142,8 @@ export const teachings = [
         presenter: "Prophet Nadia Petersen",
         duration: "37 min",
         date: "February 27, 2026",
-        videoUrl: "placeholder_13",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -140,7 +153,8 @@ export const teachings = [
         presenter: "Apostle Tom Baker",
         duration: "41 min",
         date: "February 27, 2026",
-        videoUrl: "placeholder_14",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     },
     {
@@ -150,7 +164,8 @@ export const teachings = [
         presenter: "Fiona Gallagher",
         duration: "39 min",
         date: "February 27, 2026",
-        videoUrl: "placeholder_15",
+        videoUrl: "",
+        audioUrl: "",
         downloadUrl: "#"
     }
 ];

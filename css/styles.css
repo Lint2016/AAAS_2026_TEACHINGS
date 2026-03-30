@@ -351,12 +351,12 @@ a {
 
 .modal-container {
     position: relative;
-    width: 100%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1000px;
     background-color: var(--color-base-dark);
     border-radius: var(--radius-md);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+    overflow: visible;
     transform: scale(0.95);
     transition: transform 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -372,6 +372,17 @@ a {
     padding-bottom: 56.25%;
     /* 16:9 Aspect Ratio */
     background-color: black;
+    overflow: hidden;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .video-placeholder {
@@ -396,26 +407,63 @@ a {
 
 .modal-content {
     padding: var(--spacing-md);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
-.modal-close {
+/* Modal Controls (Share & Close) */
+.modal-controls {
     position: absolute;
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    z-index: 10;
+    top: 0;
+    right: -60px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+}
+
+.modal-btn {
+    width: 44px;
+    height: 44px;
+    background: var(--color-base);
     color: white;
-    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.modal-close:hover {
+.modal-btn i {
+    font-size: 1.25rem;
+}
+
+.modal-btn:hover {
     background: var(--color-secondary);
+    transform: scale(1.1);
+    color: white;
+}
+
+.modal-share:hover {
+    background: var(--color-primary);
+    color: var(--color-base);
+}
+
+/* Adjust for mobile */
+@media (max-width: 1100px) {
+    .modal-controls {
+        right: 12px;
+        top: 12px;
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .modal-btn {
+        width: 36px;
+        height: 36px;
+        background: rgba(0, 0, 0, 0.5);
+    }
 }
 
 /* 

@@ -11,6 +11,7 @@ const teachingsList = document.getElementById('teachings-list');
 const videoModal = document.getElementById('video-modal');
 const modalOverlay = document.querySelector('.modal-overlay');
 const modalCloseBtn = document.querySelector('.modal-close');
+const modalShareBtn = document.getElementById('modal-share');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-description');
 const videoPlaceholder = document.getElementById('video-placeholder');
@@ -25,6 +26,22 @@ let currentlyOpenId = null;
 function init() {
     renderTeachings();
     setupEventListeners();
+    handleUrlHash();
+}
+
+function handleUrlHash() {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#teaching-')) {
+        const id = parseInt(hash.replace('#teaching-', ''), 10);
+        const teaching = teachings.find(t => t.id === id);
+        if (teaching) {
+            setTimeout(() => {
+                const teachingsSection = document.getElementById('teachings');
+                if (teachingsSection) teachingsSection.scrollIntoView({ behavior: 'smooth' });
+                openModal(teaching);
+            }, 500);
+        }
+    }
 }
 
 /**
@@ -85,6 +102,14 @@ function setupEventListeners() {
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
     if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 
+    // Modal Share
+    if (modalShareBtn) {
+        modalShareBtn.addEventListener('click', () => {
+            const teaching = teachings.find(t => t.id === currentlyOpenId);
+            if (teaching) handleShare(teaching);
+        });
+    }
+
     // Keyboard Support (ESC to close)
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && videoModal.classList.contains('active')) {
@@ -114,7 +139,7 @@ function handleGridClick(e) {
 
     if (!teaching) return;
 
-    if (btn.classList.contains('action-watch')) {
+    if (btn.classList.contains('action-watch') || btn.classList.contains('action-listen')) {
         openModal(teaching);
     } else if (btn.classList.contains('action-download')) {
         handleDownload(teaching);
@@ -134,8 +159,49 @@ function openModal(teaching) {
     modalTitle.textContent = teaching.title;
     modalDesc.textContent = teaching.description;
 
-    // In a real app, we'd swap the source of an iframe/video element here
-    // videoElement.src = teaching.videoUrl;
+    // Inject Vimeo Iframe or Audio
+    const videoWrapper = document.querySelector('.video-wrapper');
+    if (videoWrapper) {
+        if (teaching.videoUrl && teaching.videoUrl !== "") {
+            const videoId = teaching.videoUrl.match(/vimeo\.com\/(\d+)/)?.[1];
+            if (videoId) {
+                videoWrapper.innerHTML = `
+                    <iframe 
+                        src="https://player.vimeo.com/video/${videoId}?autoplay=1" 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                `;
+            } else {
+                videoWrapper.innerHTML = `
+                    <div class="video-placeholder">
+                        <p>Invalid Video URL</p>
+                    </div>
+                `;
+            }
+        } else if (teaching.audioUrl && teaching.audioUrl !== "") {
+            videoWrapper.innerHTML = `
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--color-base); padding: 20px;">
+                    <div style="width: 100%; max-width: 600px; text-align: center;">
+                        <i class="ph ph-headphones" style="font-size: 4rem; color: var(--color-primary); margin-bottom: 20px;"></i>
+                        <audio controls autoplay style="width: 100%;">
+                            <source src="${teaching.audioUrl}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            `;
+        } else {
+            videoWrapper.innerHTML = `
+                <div class="video-placeholder">
+                    <p>Media coming soon.</p>
+                </div>
+            `;
+        }
+    }
 
     // Show Modal
     videoModal.classList.add('active');
@@ -152,7 +218,17 @@ function closeModal() {
     currentlyOpenId = null;
     videoModal.classList.remove('active');
     videoModal.setAttribute('aria-hidden', 'true');
-    // Stop video playback logic would go here
+
+    // Stop video playback by clearing the wrapper
+    const videoWrapper = document.querySelector('.video-wrapper');
+    if (videoWrapper) {
+        videoWrapper.innerHTML = `
+            <div id="video-placeholder" class="video-placeholder">
+                <i class="ph ph-headphones"></i>
+                <p>Media Player Placeholder</p>
+            </div>
+        `;
+    }
 }
 
 /**
@@ -160,8 +236,19 @@ function closeModal() {
  * @param {Object} teaching 
  */
 function handleDownload(teaching) {
-    // In real app: window.open(teaching.downloadUrl);
-    showToast(`Downloading resources for "${teaching.title}"...`);
+    const downloadLink = teaching.audioUrl || teaching.videoUrl || teaching.downloadUrl;
+    if (downloadLink && downloadLink !== "#" && downloadLink !== "") {
+        const a = document.createElement('a');
+        a.href = downloadLink;
+        a.download = true;
+        a.target = "_blank";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloading resources for "${teaching.title}"...`);
+    } else {
+        showToast(`Download not available for "${teaching.title}" yet.`);
+    }
 }
 
 /**
@@ -169,7 +256,7 @@ function handleDownload(teaching) {
  * @param {Object} teaching 
  */
 async function handleShare(teaching) {
-    const shareUrl = `${window.location.origin}/#teaching-${teaching.id}`;
+    const shareUrl = `${window.location.href.split('#')[0]}#teaching-${teaching.id}`;
 
     try {
         await navigator.clipboard.writeText(shareUrl);

@@ -11,7 +11,7 @@
  */
 export function createTeachingCard(teaching, index) {
     // Pad the number with a leading zero if needed (e.g., 01, 02)
-    const displayNum = (index + 1).toString().padStart(2, '0');
+    const displayNum = teaching.id.toString().padStart(2, '0');
 
     return `
         <article class="teaching-card" data-id="${teaching.id}">
@@ -25,9 +25,21 @@ export function createTeachingCard(teaching, index) {
             </div>
             
             <div class="card-actions">
-                <button class="btn btn-outline btn-sm action-watch" data-id="${teaching.id}" aria-label="Watch ${teaching.title}">
-                    <i class="ph ph-play"></i> Watch
-                </button>
+                <div style="display: flex; gap: 8px;">
+                    ${teaching.audioUrl ? `
+                    <button class="btn btn-outline btn-sm action-listen" data-id="${teaching.id}" aria-label="Listen to ${teaching.title}">
+                        <i class="ph ph-headphones"></i> Listen
+                    </button>` : ''}
+                    
+                    ${teaching.videoUrl ? `
+                    <button class="btn btn-outline btn-sm action-watch" data-id="${teaching.id}" aria-label="Watch ${teaching.title}">
+                        <i class="ph ph-play"></i> Watch
+                    </button>` : ''}
+                    
+                    ${(!teaching.audioUrl && !teaching.videoUrl) ? `
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted); display: inline-flex; align-items: center;">Coming Soon</span>
+                    ` : ''}
+                </div>
                 
                 <div class="action-group-right">
                     <button class="btn btn-icon-only action-download" data-id="${teaching.id}" aria-label="Download materials for ${teaching.title}">
