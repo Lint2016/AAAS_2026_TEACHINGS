@@ -466,6 +466,18 @@ a {
     }
 }
 
+/* Audio Modal Specific Styles (Desktop) */
+@media (min-width: 769px) {
+    .modal-container.audio-mode {
+        max-width: 650px; /* Reduce width for audio */
+    }
+    
+    .modal-container.audio-mode .video-wrapper {
+        padding-bottom: 0;
+        height: 300px; /* Fixed height for audio player */
+    }
+}
+
 /* 
  * Footer 
  */

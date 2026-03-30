@@ -161,8 +161,10 @@ function openModal(teaching) {
 
     // Inject Vimeo Iframe or Audio
     const videoWrapper = document.querySelector('.video-wrapper');
+    const modalContainer = document.querySelector('.modal-container');
     if (videoWrapper) {
         if (teaching.videoUrl && teaching.videoUrl !== "") {
+            if (modalContainer) modalContainer.classList.remove('audio-mode');
             const videoId = teaching.videoUrl.match(/vimeo\.com\/(\d+)/)?.[1];
             if (videoId) {
                 videoWrapper.innerHTML = `
@@ -183,8 +185,9 @@ function openModal(teaching) {
                 `;
             }
         } else if (teaching.audioUrl && teaching.audioUrl !== "") {
+            if (modalContainer) modalContainer.classList.add('audio-mode');
             videoWrapper.innerHTML = `
-                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--color-base); padding: 20px;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--color-base); padding: 20px; box-sizing: border-box;">
                     <div style="width: 100%; max-width: 600px; text-align: center;">
                         <i class="ph ph-headphones" style="font-size: 4rem; color: var(--color-primary); margin-bottom: 20px;"></i>
                         <audio controls autoplay style="width: 100%;">
@@ -218,6 +221,9 @@ function closeModal() {
     currentlyOpenId = null;
     videoModal.classList.remove('active');
     videoModal.setAttribute('aria-hidden', 'true');
+    
+    const modalContainer = document.querySelector('.modal-container');
+    if (modalContainer) modalContainer.classList.remove('audio-mode');
 
     // Stop video playback by clearing the wrapper
     const videoWrapper = document.querySelector('.video-wrapper');
