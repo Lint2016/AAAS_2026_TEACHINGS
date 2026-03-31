@@ -758,17 +758,21 @@ a {
     max-width: 450px;
 }
 
+/* Fully reset the 16:9 ghost box — this is the source of the blank space */
 .modal-container.audio-mode .video-wrapper {
-    padding-bottom: 0;
-    height: auto;
-    margin-bottom: 0;
+    position: static !important;   /* Kill the relative positioning context */
+    padding-bottom: 0 !important;  /* Kill the 56.25% aspect-ratio hack */
+    height: auto !important;       /* Let children define height naturally */
+    margin: 0 !important;
+    overflow: visible;
 }
 
+/* Zero out all padding/margin between image and title */
 .modal-container.audio-mode .modal-content {
-    padding-top: 0px !important; /* Force tightest possible gap */
+    padding-top: 0 !important;
     margin-top: 0 !important;
 }
 
 .modal-container.audio-mode #modal-title {
-    margin-top: 10px !important;
+    margin-top: 8px;
 }

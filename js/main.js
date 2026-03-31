@@ -299,6 +299,8 @@ function openModal(teaching) {
 
         if (teaching.audioUrl && teaching.audioUrl !== "") {
             if (modalContainer) modalContainer.classList.add('audio-mode');
+            // Fully collapse the video-wrapper ghost
+            videoWrapper.style.cssText = 'position:static;padding:0;margin:0;height:auto;overflow:visible;background:transparent;';
             videoWrapper.innerHTML = `
                 <div class="audio-player-container">
                     <div class="audio-controls-wrapper">
@@ -316,6 +318,9 @@ function openModal(teaching) {
                     </div>`}
                 </div>
             `;
+            // Zero the gap between image and title
+            const modalContent = document.querySelector('.modal-content');
+            if (modalContent) modalContent.style.paddingTop = '0';
         } else {
             videoWrapper.innerHTML = `
                 <div class="video-placeholder">
@@ -350,6 +355,7 @@ function closeModal() {
     // Stop video playback by clearing the wrapper
     const videoWrapper = document.querySelector('.video-wrapper');
     if (videoWrapper) {
+        videoWrapper.style.cssText = ''; // Restore original CSS class styles
         videoWrapper.innerHTML = `
             <div id="video-placeholder" class="video-placeholder">
                 <i class="ph ph-headphones"></i>
@@ -357,6 +363,9 @@ function closeModal() {
             </div>
         `;
     }
+    // Reset modal-content padding
+    const modalContent = document.querySelector('.modal-content');
+    if (modalContent) modalContent.style.paddingTop = '';
 }
 
 /**
