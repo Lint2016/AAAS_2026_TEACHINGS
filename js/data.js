@@ -12,7 +12,7 @@ export const teachings = [
         date: "February 25, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Apostle%20Brandon%20(Morning%20Day%201).mp3",
-        imageUrl: "assets/Apostle-Brandon-resized.jpg",
+        imageUrl: "assets/Apostle-B.jpg",
         downloadUrl: "#"
     },
     {
