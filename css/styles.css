@@ -110,7 +110,9 @@ a {
     align-items: center;
     gap: var(--spacing-xs);
     padding: 12px 24px;
+    font-size: 1rem;
     font-weight: 500;
+    line-height: 1.5;
     border-radius: var(--radius-sm);
     transition: var(--transition);
     letter-spacing: 0.02em;
@@ -184,10 +186,11 @@ a {
 
 .hero-actions {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: var(--spacing-sm);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .hero-content {
@@ -701,6 +704,16 @@ a {
     .hero-section {
         height: auto;
         padding: var(--spacing-xl) 0;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
     }
 
     .footer-content {
