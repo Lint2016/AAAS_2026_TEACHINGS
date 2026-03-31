@@ -296,16 +296,6 @@ a {
     opacity: 1;
 }
 
-.card-number {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    color: rgba(255, 255, 255, 0.03);
-    position: absolute;
-    top: 0;
-    right: 1rem;
-    pointer-events: none;
-}
-
 .card-title {
     font-size: 1.25rem;
     margin-bottom: var(--spacing-xs);

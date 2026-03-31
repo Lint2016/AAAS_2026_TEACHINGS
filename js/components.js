@@ -10,12 +10,8 @@
  * @returns {string} HTML string
  */
 export function createTeachingCard(teaching, index) {
-    // Pad the number with a leading zero if needed (e.g., 01, 02)
-    const displayNum = teaching.id.toString().padStart(2, '0');
-
     return `
         <article class="teaching-card" data-id="${teaching.id}">
-            <span class="card-number">${displayNum}</span>
             <div class="card-content">
                 <h3 class="card-title">${teaching.title}</h3>
                 <p class="card-description">${teaching.description}</p>
