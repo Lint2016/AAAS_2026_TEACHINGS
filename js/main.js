@@ -13,7 +13,6 @@ const teachingsSection = document.getElementById('teachings');
 const videoModal = document.getElementById('video-modal');
 const modalOverlay = document.querySelector('#video-modal .modal-overlay');
 const modalCloseBtn = document.querySelector('#video-modal .modal-close');
-const modalShareBtn = document.getElementById('modal-share');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-description');
 const videoPlaceholder = document.getElementById('video-placeholder');
@@ -127,14 +126,6 @@ function setupEventListeners() {
     // Video Modal Interactions (Close)
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
     if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
-
-    // Modal Share
-    if (modalShareBtn) {
-        modalShareBtn.addEventListener('click', () => {
-            const teaching = teachings.find(t => t.id === currentlyOpenId);
-            if (teaching) handleShare(teaching);
-        });
-    }
 
     // Keyboard Support (ESC to close)
     document.addEventListener('keydown', (e) => {
@@ -251,8 +242,6 @@ function handleGridClick(e) {
         openModal(teaching);
     } else if (btn.classList.contains('action-download')) {
         handleDownload(teaching);
-    } else if (btn.classList.contains('action-share')) {
-        handleShare(teaching);
     }
 }
 
@@ -368,21 +357,6 @@ function handleDownload(teaching) {
         showToast(`Downloading resources for "${teaching.title}"...`);
     } else {
         showToast(`Download not available for "${teaching.title}" yet.`);
-    }
-}
-
-/**
- * Simulate Share
- * @param {Object} teaching 
- */
-async function handleShare(teaching) {
-    const shareUrl = `${window.location.href.split('#')[0]}#teaching-${teaching.id}`;
-
-    try {
-        await navigator.clipboard.writeText(shareUrl);
-        showToast('Link copied to clipboard!');
-    } catch (err) {
-        showToast('Shared!');
     }
 }
 

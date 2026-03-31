@@ -45,9 +45,6 @@ export function createTeachingCard(teaching, index) {
                     <button class="btn btn-icon-only action-download" data-id="${teaching.id}" aria-label="Download materials for ${teaching.title}">
                         <i class="ph ph-download-simple"></i>
                     </button>
-                    <button class="btn btn-icon-only action-share" data-id="${teaching.id}" aria-label="Share ${teaching.title}">
-                        <i class="ph ph-share-network"></i>
-                    </button>
                 </div>
             </div>
         </article>

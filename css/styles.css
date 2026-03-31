@@ -352,16 +352,13 @@ a {
 }
 
 .audio-player-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--color-base);
-    padding: 20px;
+    padding: 3rem 1.5rem;
 }
 .audio-player-content {
     width: 100%;
@@ -369,9 +366,9 @@ a {
     text-align: center;
 }
 .audio-icon {
-    font-size: 4rem;
+    font-size: 5rem;
     color: var(--color-primary);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .audio-player { width: 100%; }
 
@@ -442,12 +439,11 @@ a {
     height: 100%;
     z-index: 1000;
     display: flex;
-    align-items: center;
-    justify-content: center;
     padding: var(--spacing-sm);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    overflow-y: auto;
 }
 
 .modal.active {
@@ -456,11 +452,11 @@ a {
 }
 
 .modal-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
 }
@@ -469,6 +465,7 @@ a {
     position: relative;
     width: 95%;
     max-width: 1000px;
+    margin: auto; /* Fixes centering without causing top cropping */
     background-color: var(--color-base-dark);
     border-radius: var(--radius-md);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -706,4 +703,14 @@ a {
     display: inline-block;
     width: 100%;
     margin-top: var(--spacing-md);
+}
+
+/* Audio Modal Specific Styles (All Devices) */
+.modal-container.audio-mode {
+    max-width: 600px;
+}
+
+.modal-container.audio-mode .video-wrapper {
+    padding-bottom: 0;
+    height: auto;
 }
