@@ -697,12 +697,31 @@ a {
 .day-header {
     font-size: 1.75rem;
     color: var(--color-secondary);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     padding-bottom: var(--spacing-xs);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: inline-block;
     width: 100%;
     margin-top: var(--spacing-md);
+}
+
+.session-header {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.95;
+    font-family: var(--font-heading);
+}
+
+.session-header i {
+    font-size: 1.5rem;
+}
+
+.evening-spacing {
+    margin-top: var(--spacing-lg);
 }
 
 /* Audio Modal Specific Styles (All Devices) */

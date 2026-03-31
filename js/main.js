@@ -90,18 +90,44 @@ function renderTeachings() {
     Object.keys(grouped).forEach(date => {
         const groupTeachings = grouped[date];
 
-        const cardsHTML = groupTeachings.map((teaching, index) =>
-            createTeachingCard(teaching, index) 
-        ).join('');
+        const morningGroup = groupTeachings.filter(t => t.description && t.description.toLowerCase().includes('morning'));
+        const eveningGroup = groupTeachings.filter(t => t.description && t.description.toLowerCase().includes('evening'));
+        const otherGroup = groupTeachings.filter(t => !t.description || (!t.description.toLowerCase().includes('morning') && !t.description.toLowerCase().includes('evening')));
 
-        fullHTML += `
+        let sectionHTML = `
             <section class="day-section">
                 <h3 class="day-header">${date}</h3>
-                <div class="teachings-grid">
-                    ${cardsHTML}
-                </div>
-            </section>
         `;
+        
+        if (morningGroup.length > 0) {
+            sectionHTML += `
+                <h4 class="session-header"><i class="ph ph-sun"></i> Morning Sessions</h4>
+                <div class="teachings-grid">
+                    ${morningGroup.map(teaching => createTeachingCard(teaching)).join('')}
+                </div>
+            `;
+        }
+        
+        if (eveningGroup.length > 0) {
+            sectionHTML += `
+                <h4 class="session-header evening-spacing"><i class="ph ph-moon"></i> Evening Sessions</h4>
+                <div class="teachings-grid">
+                    ${eveningGroup.map(teaching => createTeachingCard(teaching)).join('')}
+                </div>
+            `;
+        }
+        
+        if (otherGroup.length > 0) {
+            sectionHTML += `
+                <h4 class="session-header evening-spacing">Special Sessions</h4>
+                <div class="teachings-grid">
+                    ${otherGroup.map(teaching => createTeachingCard(teaching)).join('')}
+                </div>
+            `;
+        }
+        
+        sectionHTML += `</section>`;
+        fullHTML += sectionHTML;
     });
 
     teachingsList.innerHTML = fullHTML;
