@@ -19,8 +19,8 @@ export function createTeachingCard(teaching, index) {
             <div class="card-content">
                 <h3 class="card-title">${teaching.title}</h3>
                 <p class="card-description">${teaching.description}</p>
-                <div class="card-meta" style="margin-bottom: 1rem; font-size: 0.8rem; color: var(--color-text-muted);">
-                    <span>${teaching.presenter}</span> • <span>${teaching.duration}</span>
+                <div class="card-meta">
+                    <span class="meta-label">Audio</span> <span class="meta-divider">•</span> <span>${teaching.duration}</span>
                 </div>
             </div>
             
@@ -37,7 +37,7 @@ export function createTeachingCard(teaching, index) {
                     </button>` : ''}
                     
                     ${(!teaching.audioUrl && !teaching.videoUrl) ? `
-                    <span style="font-size: 0.8rem; color: var(--color-text-muted); display: inline-flex; align-items: center;">Coming Soon</span>
+                    <span class="status-coming-soon">Coming Soon</span>
                     ` : ''}
                 </div>
                 

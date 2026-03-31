@@ -160,7 +160,7 @@ export const teachings = [
     {
         id: 15,
         title: "Dwayne Whitehead",
-        description: " Morning service message.",
+        description: "Morning service message.",
         presenter: "Duration",
         duration: "49 min",
         date: "February 27, 2026",

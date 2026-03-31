@@ -44,15 +44,23 @@
             <h1 class="display-title">All Africa Apostolic Summit</h1>
             <p class="hero-description">A transformative experience of apostolic impartation, prophetic teachings,
                 leadership activation, and prayer, as we equip and empower Africa’s next generation of Kingdom leaders.</p>
-            <button id="scroll-to-teachings" class="btn btn-primary">
-                Explore Teachings <i class="ph ph-arrow-down"></i>
-            </button>
+            <div class="hero-actions">
+                <button id="access-teachings-btn" class="btn btn-primary">
+                    Click here to access teachings <i class="ph ph-lock-key-open"></i>
+                </button>
+                <button id="scroll-to-teachings" class="btn btn-primary hidden">
+                    Explore Teachings <i class="ph ph-arrow-down"></i>
+                </button>
+                <button id="logout-btn" class="btn btn-outline hidden">
+                    Logout <i class="ph ph-sign-out"></i>
+                </button>
+            </div>
         </div>
         <div class="hero-background-overlay"></div>
     </header>
 
     <!-- Teachings Section -->
-    <main id="teachings" class="teachings-section">
+    <main id="teachings" class="teachings-section hidden">
         <div class="container">
             <div class="section-header">
                 <h2>The Collection</h2>
@@ -64,6 +72,37 @@
             </div>
         </div>
     </main>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="modal" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1"></div>
+        <div class="modal-container auth-modal-container" role="dialog" aria-modal="true">
+            <div class="modal-content auth-content">
+                <div class="auth-header">
+                    <i class="ph ph-lock-key"></i>
+                    <h3>Access Required</h3>
+                    <p>Please enter your registered email to access the exclusive AAASummit 2026 teachings.</p>
+                </div>
+                <form id="auth-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="reg-email" class="sr-only">Email Address</label>
+                        <input type="email" id="reg-email" placeholder="example@email.com" autocomplete="email" required>
+                    </div>
+                    <div id="auth-error" class="auth-error hidden">
+                        <i class="ph ph-warning-circle"></i>
+                        <span id="auth-error-text">Email not found. Please provide a registered email.</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="auth-submit">
+                        <span class="btn-text">Verify Access</span>
+                        <div class="spinner hidden"></div>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-full auth-cancel" id="auth-cancel" style="margin-top: 10px;">
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Video Modal -->
     <div id="video-modal" class="modal" aria-hidden="true">

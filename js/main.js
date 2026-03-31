@@ -5,28 +5,52 @@
 
 import { teachings } from './data.js';
 import { createTeachingCard } from './components.js';
+import { db, collection, query, where, getDocs } from './firebase-config.js';
 
 // DOM Elements
 const teachingsList = document.getElementById('teachings-list');
+const teachingsSection = document.getElementById('teachings');
 const videoModal = document.getElementById('video-modal');
-const modalOverlay = document.querySelector('.modal-overlay');
-const modalCloseBtn = document.querySelector('.modal-close');
+const modalOverlay = document.querySelector('#video-modal .modal-overlay');
+const modalCloseBtn = document.querySelector('#video-modal .modal-close');
 const modalShareBtn = document.getElementById('modal-share');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-description');
 const videoPlaceholder = document.getElementById('video-placeholder');
 const toast = document.getElementById('toast');
 const toastMessage = document.getElementById('toast-message');
+const accessBtn = document.getElementById('access-teachings-btn');
 const scrollBtn = document.getElementById('scroll-to-teachings');
+const logoutBtn = document.getElementById('logout-btn');
+
+// Auth DOM Elements
+const authModal = document.getElementById('auth-modal');
+const authForm = document.getElementById('auth-form');
+const emailInput = document.getElementById('reg-email');
+const authError = document.getElementById('auth-error');
+const authCancelBtn = document.getElementById('auth-cancel');
+const authOverlay = document.querySelector('#auth-modal .modal-overlay');
+const authSubmitBtn = document.getElementById('auth-submit');
+const authSpinner = authSubmitBtn?.querySelector('.spinner');
+const authBtnText = authSubmitBtn?.querySelector('.btn-text');
 
 // State
 let currentlyOpenId = null;
+let isAuthenticated = false;
 
 // Initialization
 function init() {
+    checkSession();
     renderTeachings();
     setupEventListeners();
     handleUrlHash();
+}
+
+function checkSession() {
+    const sessionCookie = localStorage.getItem('aaas_session');
+    if (sessionCookie === 'true') {
+        grantAccess(false);
+    }
 }
 
 function handleUrlHash() {
@@ -34,11 +58,15 @@ function handleUrlHash() {
     if (hash && hash.startsWith('#teaching-')) {
         const id = parseInt(hash.replace('#teaching-', ''), 10);
         const teaching = teachings.find(t => t.id === id);
+        
         if (teaching) {
             setTimeout(() => {
-                const teachingsSection = document.getElementById('teachings');
-                if (teachingsSection) teachingsSection.scrollIntoView({ behavior: 'smooth' });
-                openModal(teaching);
+                if (!isAuthenticated) {
+                    showAuthModal();
+                } else {
+                    if (teachingsSection) teachingsSection.scrollIntoView({ behavior: 'smooth' });
+                    openModal(teaching);
+                }
             }, 500);
         }
     }
@@ -58,19 +86,13 @@ function renderTeachings() {
         return acc;
     }, {});
 
-    // Generate HTML for each group
     let fullHTML = '';
 
-    // Convert object to array to sort if needed, or iterate keys
-    // Assuming data is pre-sorted or preserving insertion order is fine
     Object.keys(grouped).forEach(date => {
         const groupTeachings = grouped[date];
 
         const cardsHTML = groupTeachings.map((teaching, index) =>
-            createTeachingCard(teaching, index) // Note: index might reset or needs to be cumulative. 
-            // For now, index is ok per group or we can find original index.
-            // Actually, previously it was 0-14. Now it will be 0-4 for each group. 
-            // If we want 01-15 unique numbers, we should find index in main array.
+            createTeachingCard(teaching, index) 
         ).join('');
 
         fullHTML += `
@@ -90,15 +112,19 @@ function renderTeachings() {
  * Global Event Listeners
  */
 function setupEventListeners() {
-    // Scroll Button
-    if (scrollBtn) {
-        scrollBtn.addEventListener('click', () => {
-            const teachingsSection = document.getElementById('teachings');
-            teachingsSection?.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
+    // Access Controls
+    if (accessBtn) accessBtn.addEventListener('click', showAuthModal);
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
+    if (scrollBtn) scrollBtn.addEventListener('click', () => {
+        teachingsSection?.scrollIntoView({ behavior: 'smooth' });
+    });
 
-    // Modal Interactions (Close)
+    // Auth Modal Interactions
+    if (authCancelBtn) authCancelBtn.addEventListener('click', closeAuthModal);
+    if (authOverlay) authOverlay.addEventListener('click', closeAuthModal);
+    if (authForm) authForm.addEventListener('submit', handleAuthSubmit);
+
+    // Video Modal Interactions (Close)
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
     if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 
@@ -112,17 +138,99 @@ function setupEventListeners() {
 
     // Keyboard Support (ESC to close)
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && videoModal.classList.contains('active')) {
-            closeModal();
+        if (e.key === 'Escape') {
+            if (videoModal && videoModal.classList.contains('active')) closeModal();
+            if (authModal && authModal.classList.contains('active')) closeAuthModal();
         }
     });
 
-    // Delegated Events for Grid (Watch, Download, Share)
     // Delegated Events for Grid (Watch, Download, Share)
     if (teachingsList) {
         teachingsList.addEventListener('click', handleGridClick);
     }
 }
+
+/**
+ * Authentication Flow
+ */
+function showAuthModal() {
+    authModal.classList.add('active');
+    authModal.setAttribute('aria-hidden', 'false');
+    authError.classList.add('hidden');
+    emailInput.value = '';
+    emailInput.focus();
+}
+
+function closeAuthModal() {
+    authModal.classList.remove('active');
+    authModal.setAttribute('aria-hidden', 'true');
+    authError.classList.add('hidden');
+}
+
+async function handleAuthSubmit(e) {
+    e.preventDefault();
+    const email = emailInput.value.trim().toLowerCase();
+    if (!email) return;
+
+    // Show Loading View
+    authBtnText.textContent = 'Verifying...';
+    authSpinner.classList.remove('hidden');
+    authSubmitBtn.disabled = true;
+    authError.classList.add('hidden');
+
+    try {
+        const q = query(collection(db, "registrations"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            // Found
+            closeAuthModal();
+            grantAccess(true);
+            showToast('Verification successful! Welcome.');
+        } else {
+            // Not Found
+            authError.classList.remove('hidden');
+        }
+    } catch (error) {
+        console.error("Firebase lookup error:", error);
+        authError.classList.remove('hidden');
+        authError.querySelector('span').textContent = 'An error occurred checking our records. Please try again.';
+    } finally {
+        authBtnText.textContent = 'Verify Access';
+        authSpinner.classList.add('hidden');
+        authSubmitBtn.disabled = false;
+    }
+}
+
+function grantAccess(shouldScroll = true) {
+    isAuthenticated = true;
+    localStorage.setItem('aaas_session', 'true');
+    
+    teachingsSection.classList.remove('hidden');
+    accessBtn.classList.add('hidden');
+    scrollBtn.classList.remove('hidden');
+    logoutBtn.classList.remove('hidden');
+
+    if (shouldScroll) {
+        setTimeout(() => {
+            teachingsSection.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+}
+
+function logout() {
+    isAuthenticated = false;
+    localStorage.removeItem('aaas_session');
+    
+    teachingsSection.classList.add('hidden');
+    accessBtn.classList.remove('hidden');
+    scrollBtn.classList.add('hidden');
+    logoutBtn.classList.add('hidden');
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('You have been securely logged out.');
+}
+
 
 /**
  * Handles clicks within the teachings grid
@@ -159,6 +267,9 @@ function openModal(teaching) {
     modalTitle.textContent = teaching.title;
     modalDesc.textContent = teaching.description;
 
+    // Update URL Hash without jumping
+    history.replaceState(null, null, `#teaching-${teaching.id}`);
+
     // Inject Vimeo Iframe or Audio
     const videoWrapper = document.querySelector('.video-wrapper');
     const modalContainer = document.querySelector('.modal-container');
@@ -187,10 +298,10 @@ function openModal(teaching) {
         } else if (teaching.audioUrl && teaching.audioUrl !== "") {
             if (modalContainer) modalContainer.classList.add('audio-mode');
             videoWrapper.innerHTML = `
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--color-base); padding: 20px; box-sizing: border-box;">
-                    <div style="width: 100%; max-width: 600px; text-align: center;">
-                        <i class="ph ph-headphones" style="font-size: 4rem; color: var(--color-primary); margin-bottom: 20px;"></i>
-                        <audio controls autoplay style="width: 100%;">
+                <div class="audio-player-container">
+                    <div class="audio-player-content">
+                        <i class="ph ph-headphones audio-icon"></i>
+                        <audio controls autoplay class="audio-player">
                             <source src="${teaching.audioUrl}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
@@ -209,9 +320,10 @@ function openModal(teaching) {
     // Show Modal
     videoModal.classList.add('active');
     videoModal.setAttribute('aria-hidden', 'false');
-
-    // Focus management (simple version)
-    modalCloseBtn.focus();
+    
+    setTimeout(() => {
+        modalCloseBtn?.focus();
+    }, 100);
 }
 
 /**
@@ -222,6 +334,8 @@ function closeModal() {
     videoModal.classList.remove('active');
     videoModal.setAttribute('aria-hidden', 'true');
     
+    history.replaceState(null, null, window.location.pathname + window.location.search);
+
     const modalContainer = document.querySelector('.modal-container');
     if (modalContainer) modalContainer.classList.remove('audio-mode');
 
@@ -268,7 +382,6 @@ async function handleShare(teaching) {
         await navigator.clipboard.writeText(shareUrl);
         showToast('Link copied to clipboard!');
     } catch (err) {
-        // Fallback or error handling
         showToast('Shared!');
     }
 }
@@ -280,11 +393,17 @@ async function handleShare(teaching) {
 function showToast(msg) {
     toastMessage.textContent = msg;
     toast.classList.remove('hidden');
+    
+    if (window.toastTimeout) {
+        clearTimeout(window.toastTimeout);
+        clearTimeout(window.toastFadeTimeout);
+    }
+    
     toast.style.opacity = '1';
 
-    setTimeout(() => {
+    window.toastFadeTimeout = setTimeout(() => {
         toast.style.opacity = '0';
-        setTimeout(() => {
+        window.toastTimeout = setTimeout(() => {
             toast.classList.add('hidden');
         }, 300);
     }, 3000);
