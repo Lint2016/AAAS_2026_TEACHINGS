@@ -4,6 +4,18 @@
  */
 export const teachings = [
     {
+        id: 5,
+        title: "Apostle Brandon",
+        description: "Morning service message.",
+        presenter: "Duration",
+        duration: "16 min",
+        date: "February 25, 2026",
+        videoUrl: "",
+        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Apostle%20Brandon%20(Morning%20Day%201).mp3",
+        imageUrl: "assets/Apostle-Brandon-resized.jpg",
+        downloadUrl: "#"
+    },
+    {
         id: 1,
         title: "Apostle Kabelo",
         description: "Morning service message.",
@@ -51,16 +63,29 @@ export const teachings = [
         imageUrl: "assets/Thamo-Naidoo-resized.jpg",
         downloadUrl: "#"
     },
+    
     {
-        id: 5,
-        title: "Apostle Brandon",
+        id: 8,
+        title: "Zerubbabel Mengistu",
         description: "Morning service message.",
         presenter: "Duration",
-        duration: "16 min",
-        date: "February 25, 2026",
+        duration: "31 min",
+        date: "February 26, 2026",
         videoUrl: "",
-        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Apostle%20Brandon%20(Morning%20Day%201).mp3",
-        imageUrl: "assets/Apostle-Brandon-resized.jpg",
+        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Zerubbabel%20Mengistu%20(Morning%20Day%202).mp3",
+        imageUrl: "assets/Zerubbabel-Mengistu-resized.jpg",
+        downloadUrl: "#"
+    },
+    {
+        id: 10,
+        title: "Ray Tshitake",
+        description: "Morning service message.",
+        presenter: "Duration",
+        duration: "20 min",
+        date: "February 26, 2026",
+        videoUrl: "",
+        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Ray%20Tshitake%20(Morning%20Day%202).mp3",
+        imageUrl: "assets/Ray-Tshitake-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -87,18 +112,7 @@ export const teachings = [
         imageUrl: "assets/Maxwell-Ogaga-resized.jpg",
         downloadUrl: "#"
     },
-    {
-        id: 8,
-        title: "Zerubbabel Mengistu",
-        description: "Morning service message.",
-        presenter: "Duration",
-        duration: "31 min",
-        date: "February 26, 2026",
-        videoUrl: "",
-        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Zerubbabel%20Mengistu%20(Morning%20Day%202).mp3",
-        imageUrl: "assets/Zerubbabel-Mengistu-resized.jpg",
-        downloadUrl: "#"
-    },
+    
     {
         id: 9,
         title: "Zerubbabel Mengistu",
@@ -111,19 +125,32 @@ export const teachings = [
         imageUrl: "assets/Zerubbabel-Mengistu-resized.jpg",
         downloadUrl: "#"
     },
-    {
-        id: 10,
-        title: "Ray Tshitake",
+     {
+        id: 13,
+        title: "Joshua Obeng",
         description: "Morning service message.",
         presenter: "Duration",
-        duration: "20 min",
-        date: "February 26, 2026",
+        duration: "55 min",
+        date: "February 27, 2026",
         videoUrl: "",
-        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Ray%20Tshitake%20(Morning%20Day%202).mp3",
-        imageUrl: "assets/Ray-Tshitake-resized.jpg",
+        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Joshua%20Obeng%20(Morning%20Day%203).mp3",
+        imageUrl: "assets/Joshua-Obeng-resized.jpg",
         downloadUrl: "#"
     },
-    {
+{
+    id: 15,
+    title: "Dwayne Whitehead",
+    description: "Morning service message.",
+    presenter: "Duration",
+    duration: "49 min",
+    date: "February 27, 2026",
+    videoUrl: "",
+    audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Dwayne%20Whitehead%20(Morning%20Day%203).mp3",
+    imageUrl: "assets/Dwayne-Whitehead-resized.jpg",
+    downloadUrl: "#"
+},
+
+{
         id: 11,
         title: "Olakunle Zakariya",
         description: "Morning service message.",
@@ -147,18 +174,7 @@ export const teachings = [
         imageUrl: "assets/Olakunle-Zakariya-resized.jpg",
         downloadUrl: "#"
     },
-    {
-        id: 13,
-        title: "Joshua Obeng",
-        description: "Morning service message.",
-        presenter: "Duration",
-        duration: "55 min",
-        date: "February 27, 2026",
-        videoUrl: "",
-        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Joshua%20Obeng%20(Morning%20Day%203).mp3",
-        imageUrl: "assets/Joshua-Obeng-resized.jpg",
-        downloadUrl: "#"
-    },
+   
     {
         id: 14,
         title: "Joshua Obeng",
@@ -171,16 +187,5 @@ export const teachings = [
         imageUrl: "assets/Joshua-Obeng-resized.jpg",
         downloadUrl: "#"
     },
-    {
-        id: 15,
-        title: "Dwayne Whitehead",
-        description: "Morning service message.",
-        presenter: "Duration",
-        duration: "49 min",
-        date: "February 27, 2026",
-        videoUrl: "",
-        audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Dwayne%20Whitehead%20(Morning%20Day%203).mp3",
-        imageUrl: "assets/Dwayne-Whitehead-resized.jpg",
-        downloadUrl: "#"
-    }
+    
 ];
