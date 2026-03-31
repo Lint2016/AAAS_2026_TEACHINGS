@@ -21,19 +21,18 @@ export function createTeachingCard(teaching, index) {
             </div>
             
             <div class="card-actions">
-                <div style="display: flex; gap: 8px;">
-                    ${teaching.audioUrl ? `
-                    <button class="btn btn-outline btn-sm action-listen" data-id="${teaching.id}" aria-label="Listen to ${teaching.title}">
+                <div class="action-group-left">
+                    <!-- Video functionally disabled
+                    ${teaching.videoUrl && teaching.videoUrl !== "" ? `
+                    <button class="btn btn-primary action-watch" data-id="${teaching.id}" aria-label="Watch ${teaching.title}">
+                        <i class="ph ph-play-circle"></i> Watch
+                    </button>
+                    ` : ''}
+                    -->
+                    ${teaching.audioUrl && teaching.audioUrl !== "" ? `
+                    <button class="btn btn-secondary action-listen" data-id="${teaching.id}" aria-label="Listen to ${teaching.title}">
                         <i class="ph ph-headphones"></i> Listen
-                    </button>` : ''}
-                    
-                    ${teaching.videoUrl ? `
-                    <button class="btn btn-outline btn-sm action-watch" data-id="${teaching.id}" aria-label="Watch ${teaching.title}">
-                        <i class="ph ph-play"></i> Watch
-                    </button>` : ''}
-                    
-                    ${(!teaching.audioUrl && !teaching.videoUrl) ? `
-                    <span class="status-coming-soon">Coming Soon</span>
+                    </button>
                     ` : ''}
                 </div>
                 

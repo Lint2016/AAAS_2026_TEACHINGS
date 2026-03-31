@@ -289,38 +289,31 @@ function openModal(teaching) {
     const videoWrapper = document.querySelector('.video-wrapper');
     const modalContainer = document.querySelector('.modal-container');
     if (videoWrapper) {
-        if (teaching.videoUrl && teaching.videoUrl !== "") {
-            if (modalContainer) modalContainer.classList.remove('audio-mode');
-            const videoId = teaching.videoUrl.match(/vimeo\.com\/(\d+)/)?.[1];
-            if (videoId) {
-                videoWrapper.innerHTML = `
-                    <iframe 
-                        src="https://player.vimeo.com/video/${videoId}?autoplay=1" 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                `;
-            } else {
-                videoWrapper.innerHTML = `
-                    <div class="video-placeholder">
-                        <p>Invalid Video URL</p>
-                    </div>
-                `;
-            }
-        } else if (teaching.audioUrl && teaching.audioUrl !== "") {
+        
+        // --- Video Functionality Disabled ---
+        // if (teaching.videoUrl && teaching.videoUrl !== "") {
+        //     if (modalContainer) modalContainer.classList.remove('audio-mode');
+        //     const videoId = teaching.videoUrl.match(/vimeo\\.com\\/(\\d+)/)?.[1];
+        //     videoWrapper.innerHTML = '<video controls autoplay><source src="' + teaching.videoUrl + '" type="video/mp4"></video>';
+        // } else 
+
+        if (teaching.audioUrl && teaching.audioUrl !== "") {
             if (modalContainer) modalContainer.classList.add('audio-mode');
             videoWrapper.innerHTML = `
                 <div class="audio-player-container">
-                    <div class="audio-player-content">
-                        <i class="ph ph-headphones audio-icon"></i>
+                    <div class="audio-controls-wrapper">
                         <audio controls autoplay class="audio-player">
                             <source src="${teaching.audioUrl}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
+                    ${teaching.imageUrl ? `
+                    <div class="speaker-image-wrapper">
+                        <img src="${teaching.imageUrl}" alt="${teaching.title}" class="audio-speaker-img">
+                    </div>` : `
+                    <div class="speaker-image-wrapper placeholder-wrapper">
+                        <i class="ph ph-headphones audio-icon"></i>
+                    </div>`}
                 </div>
             `;
         } else {

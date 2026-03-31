@@ -12,6 +12,7 @@ export const teachings = [
         date: "February 25, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Apostle%20Kabelo%20(Morning%20Day%201).mp3",
+        imageUrl: "assets/Apostle-Kabelo-Moroke-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -23,28 +24,31 @@ export const teachings = [
         date: "February 25, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Apostle%20Kabelo%20(Evening%20Day%201).mp3",
+        imageUrl: "assets/Apostle-Kabelo-Moroke-resized.jpg",
         downloadUrl: "#"
     },
     {
         id: 3,
-        title: "Dr. Thamo Naidoo",
+        title: " Thamo Naidoo",
         description: "Morning service message.",
         presenter: "Duration",
         duration: "50 min",
         date: "February 25, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Thamo%20Naidoo%20(Morning%20Day%201).mp3",
+        imageUrl: "assets/Thamo-Naidoo-resized.jpg",
         downloadUrl: "#"
     },
     {
         id: 4,
-        title: "Dr. Thamo Naidoo",
+        title: " Thamo Naidoo",
         description: "Evening service message.",
         presenter: "Duration",
         duration: "40 min",
         date: "February 25, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Thamo%20Naidoo%20(Evening%20Day%201).mp3",
+        imageUrl: "assets/Thamo-Naidoo-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -56,6 +60,7 @@ export const teachings = [
         date: "February 25, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Apostle%20Brandon%20(Morning%20Day%201).mp3",
+        imageUrl: "assets/Apostle-Brandon-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -67,6 +72,7 @@ export const teachings = [
         date: "February 26, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Maxwell%20Ogaga%20(Morning%20Day%202).mp3",
+        imageUrl: "assets/Maxwell-Ogaga-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -78,6 +84,7 @@ export const teachings = [
         date: "February 26, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Maxwell%20Ogaga%20(Evening%20Day%202).mp3",
+        imageUrl: "assets/Maxwell-Ogaga-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -89,6 +96,7 @@ export const teachings = [
         date: "February 26, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Zerubbabel%20Mengistu%20(Morning%20Day%202).mp3",
+        imageUrl: "assets/Zerubbabel-Mengistu-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -100,6 +108,7 @@ export const teachings = [
         date: "February 26, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Zerubbabel%20Mengistu%20(Evening%20Day%202).mp3",
+        imageUrl: "assets/Zerubbabel-Mengistu-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -111,6 +120,7 @@ export const teachings = [
         date: "February 26, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Ray%20Tshitake%20(Morning%20Day%202).mp3",
+        imageUrl: "assets/Ray-Tshitake-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -122,6 +132,7 @@ export const teachings = [
         date: "February 27, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Olakunle-Zakariya-Morning-Day-3.mp3",
+        imageUrl: "assets/Olakunle-Zakariya-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -133,6 +144,7 @@ export const teachings = [
         date: "February 27, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Olakunle%20Zakariya%20(Evening%20Day%203).mp3",
+        imageUrl: "assets/Olakunle-Zakariya-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -144,6 +156,7 @@ export const teachings = [
         date: "February 27, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Joshua%20Obeng%20(Morning%20Day%203).mp3",
+        imageUrl: "assets/Joshua-Obeng-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -155,6 +168,7 @@ export const teachings = [
         date: "February 27, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Joshua%20Obeng%20(Evening%20Day%203).mp3",
+        imageUrl: "assets/Joshua-Obeng-resized.jpg",
         downloadUrl: "#"
     },
     {
@@ -166,6 +180,7 @@ export const teachings = [
         date: "February 27, 2026",
         videoUrl: "",
         audioUrl: "https://pub-c8882b37009443f6b951dd7e5000e459.r2.dev/Dwayne%20Whitehead%20(Morning%20Day%203).mp3",
+        imageUrl: "assets/Dwayne-Whitehead-resized.jpg",
         downloadUrl: "#"
     }
 ];
